@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talk Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f8fb;--card:#ffffff;--ink:#0f172a;--muted:#475569;--line:#e2e8f0;--teal:#0f766e;--accent:#0d9488;--amber:#b45309;--pink:#be185d}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#070b16;--card:#0f1729;--ink:#e8eefc;--muted:#97a8c7;--line:rgba(148,163,184,.18);--teal:#2dd4bf;--accent:#2dd4bf;--amber:#fbbf24;--pink:#f472b6}}
+:root[data-theme="dark"]{--bg:#070b16;--card:#0f1729;--ink:#e8eefc;--muted:#97a8c7;--line:rgba(148,163,184,.18);--teal:#2dd4bf;--accent:#2dd4bf;--amber:#fbbf24;--pink:#f472b6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:40px 16px 80px}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.015em;line-height:1.2}
+h1{font-size:40px;margin:6px 0 8px}
+h2{font-size:28px;margin:56px 0 14px;padding-top:12px;border-top:2px solid var(--line)}
+h3{font-size:20px;margin:28px 0 8px}
+.kicker{font:600 13px 'Space Grotesk';letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+p{margin:8px 0}
+.muted{color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 6px}
+nav a{font-size:14px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none}
+nav a:hover{border-color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin:14px 0}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 12.5px 'Space Grotesk';letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tw{overflow-x:auto}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:0}
+.slide{border-left:5px solid var(--c);}
+.slide .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.slide .hd b{font:700 19px 'Space Grotesk'}
+.slide .hd span{font-size:14px;color:var(--muted)}
+.say p{font-size:17px}
+.left{margin:12px 0 4px;font-size:14.5px;color:var(--pink)}
+details{border-top:1px solid var(--line);padding:9px 0}
+summary{cursor:pointer;font-weight:600}
+details p{color:var(--muted);margin:6px 0 2px}
+.qlabel{font:600 12px 'Space Grotesk';letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+ul{padding-left:20px}
+li{margin:4px 0}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btns a{padding:10px 16px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
+.btns a.alt{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+@media print{nav,.btns{display:none}details{display:block}details>*{display:block}body{background:#fff;color:#000}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="kicker">DATA 255 · Fall 2026 · Team talk guide</div>
+ <h1>Waymo case study + Masked Autoencoders</h1>
+ <p class="muted">Ten minutes, four speakers. Everything we say, everything we show, what we leave out on purpose, and the questions that will likely come.</p>
+ <div class="btns"><a href="presenter.html">Open presenter view</a><a class="alt" href="deck.html">Open slides</a></div>
+ <nav>
+  <a href="#run">How to run it</a><a href="#who">Who says what</a><a href="#waymo">Waymo in a nutshell</a><a href="#mae">MAE in a nutshell</a>
+  <a href="#script">Full script + Q&amp;A per slide</a><a href="#tough">Tougher questions</a><a href="#numbers">Key numbers</a><a href="#glossary">Glossary</a>
+ </nav>
+
+ <h2 id="run">How to run it</h2>
+ <div class="card">
+  <ol>
+   <li>On the laptop connected to the projector, open <b>presenter.html</b>.</li>
+   <li>Click <b>Open audience window</b>. Drag that window to the projector screen and press <b>F</b> there for full screen.</li>
+   <li>Control everything from the presenter view: <b>→ / Space / PageDown</b> next, <b>← / PageUp</b> back. A presentation clicker works too. The audience window follows.</li>
+   <li>The timer starts on the first advance. It shows total time (target 10:00), section time (Waymo or MAE, target 5:00 each), and whether you are ahead or behind.</li>
+   <li>Each slide in the presenter view shows: the words to read, a hand-off cue when the speaker changes, what we left out on purpose, and the likely questions with answers.</li>
+  </ol>
+  <p class="muted">Both windows must be open in the same browser on the same computer to stay in sync. Anyone else can open the slides on their own device, but those copies don't sync. On the method slide, click the graphic or press R to draw a new random mask.</p>
+ </div>
+
+ <h2 id="who">Who says what</h2>
+ <div class="card tw"><table id="whoTable"><thead><tr><th>Slides</th><th>Speaker</th><th>Part</th><th>Planned</th></tr></thead><tbody></tbody></table></div>
+ <p class="muted">Planned times assume about 2.5 spoken words per second. The total is about 9 minutes, which leaves time for transitions and clicks.</p>
+
+ <h2 id="waymo">Waymo in a nutshell</h2>
+ <div class="card">
+  <p><b>What it is.</b> Waymo, owned by Alphabet, runs paid taxi rides with nobody in the driver's seat, inside approved city areas. About 500,000 paid rides a week by March 2026, and 271.3 million rider-only miles by June 2026.</p>
+  <p><b>The problem.</b> See with cameras, lidar and radar, predict what everyone nearby will do, and choose a safe path many times a second, on the car's own computer. It's hard because of <i>latency</i> (big models are too slow for the car), <i>the long tail</i> (rare, dangerous events have almost no data), and <i>verifiability</i> (you need statistical proof, not a demo).</p>
+  <p><b>How it works.</b> The Waymo Foundation Model has a fast <i>Sensor Fusion Encoder</i> (System 1) that turns sensor data into objects, and a slow <i>Driving VLM</i> trained using Gemini (System 2) that brings world knowledge for odd scenes. A <i>World Decoder</i> turns both into forecasts, map elements and trajectories. Big teacher models are distilled into small students that run in the car.</p>
+  <p><b>How it improves.</b> One model, three roles: Driver, Simulator, Critic. The Driver practices in the Simulator with rewards and penalties. The Critic flags odd moments in real logs; engineers fix them, test in simulation, and a safety framework gates releases. The simulator is a generative world model built on DeepMind's Genie 3 that makes camera and lidar data for rare cases.</p>
+  <p><b>How success is measured.</b> Crash rates compared with human drivers on similar roads, with confidence intervals: 95% fewer serious-injury crashes, 93% fewer pedestrian-injury crashes, 82% fewer any-injury crashes. This is retrospective, not a randomized trial, and readiness is judged separately in a Safety Case.</p>
+  <p><b>Failures.</b> School bus recall 25E084 (3,067 vehicles); the San Francisco blackout (remote-assistance surge, rules changed); Santa Monica school zone collision (braked about 17 to under 6 mph, minor injuries, NTSB ongoing).</p>
+  <p><b>Our lesson.</b> The advantage is less one network and more the system around it: distillation for latency, generative simulation for rare events, careful statistics for proof.</p>
+  <p class="muted"><b>Honesty line to repeat if pushed:</b> public sources do not prove that EMMA, MotionLM or Genie 3 run unchanged in the paid service, and they do not disclose data splits, leakage controls, exact latency or retraining cadence.</p>
+ </div>
+
+ <h2 id="mae">MAE in a nutshell</h2>
+ <div class="card">
+  <p><b>Paper.</b> K. He, X. Chen, S. Xie, Y. Li, P. Dollár, R. Girshick, "Masked Autoencoders Are Scalable Vision Learners", CVPR 2022, Facebook AI Research. CVPR h5-index 450 (#2 of all venues, #1 in computer vision). 18,000+ citations.</p>
+  <p><b>Problem.</b> Labels are expensive. BERT showed that hiding words and predicting them trains language models without labels. Vision lagged because CNNs don't handle missing pieces well, image patches are redundant (easy to fill from neighbours), and the decoder predicts low-level pixels.</p>
+  <p><b>Method.</b> Cut the image into 16×16 patches and hide 75% at random. The large ViT encoder sees only the visible 25% (no mask tokens). Then mask tokens are added and a small decoder (8 blocks, 512-d, about 9% of encoder compute per token) reconstructs the pixels. The loss is mean squared error on the hidden patches only. After pretraining, the decoder is thrown away and the encoder is fine-tuned.</p>
+  <p><b>Results.</b> ViT-L fine-tuned: 85.9% top-1 on ImageNet-1K (supervised 82.6, MoCo v3 84.1, BEiT 85.2). Supervised training saturates with size (82.3 / 82.6 / 83.1 for B / L / H); MAE keeps rising (83.6 / 85.9 / 86.9), and ViT-H at 448 px reaches 87.8%.</p>
+  <p><b>Why it works (ablations).</b> Mask tokens out of the encoder: linear probe 59.6 → 73.5 and 3.3× fewer FLOPs. Random masking beats block (82.8) and grid (84.0): 84.9. No augmentation still gives 84.0. Normalised pixels (85.4) match dVAE tokens (85.3).</p>
+  <p><b>What it buys.</b> 2.8× faster pretraining for ViT-L (42.4 → 15.4 h), 3.5× for ViT-H (119.6 → 34.5 h). Better transfer: COCO box AP 49.3 → 53.3, mask AP 43.9 → 47.2, ADE20K mIoU 49.9 → 53.6 (ViT-L).</p>
+  <p><b>Our critiques.</b> Reviewer: strong accept, but incremental novelty, a linear-probing gap, and ViT/ImageNet-only evidence. Patent board: fund internal use, don't fund a broad patent (dense prior art, CC BY-NC weights). Code: one clean file and an argsort masking trick, but pinned to timm 0.3.2, no tests, archived August 2025. Authors: the team behind ResNet, Mask R-CNN, MoCo, COCO and the R-CNN family.</p>
+  <p><b>Our project.</b> Our autoencoder homework used the same objective. Our UCF101 video work is a low-label setting, so the plan is to fine-tune the last blocks of an MAE encoder and compare with our scratch CNN.</p>
+ </div>
+
+ <h2 id="script">Full script, gaps and expected Q&amp;A, slide by slide</h2>
+ <p class="muted">"Left out on purpose" lists what we chose not to explain on stage. Those are the most likely questions, so the answers are right below each slide. The speaker of that slide answers first.</p>
+ <div id="slides"></div>
+
+ <h2 id="tough">Tougher questions (any slide)</h2>
+ <div class="card">
+  <h3>Waymo</h3>
+  <details><summary>Is Waymo end-to-end or modular?</summary><p>Both, in a sense. Waymo describes end-to-end learning across the Foundation Model, but it keeps structured outputs like objects, map elements and trajectories, which help validation and debugging. Public sources don't show one loss training the whole production stack.</p></details>
+  <details><summary>Why did you choose Waymo for the case study?</summary><p>It connects to our patent analysis: a large multimodal model gives understanding while a smaller, faster path produces time-critical actions. That's an analogy we use for comparison, not a claim that the patent is Waymo's design.</p></details>
+  <details><summary>What is not public about Waymo's pipeline?</summary><p>The full train, validation and test protocol, geographic holdout, leakage controls, exact latency budget, retraining cadence, rollback thresholds and monitoring dashboards. So the exact pipeline can't be reproduced from public sources.</p></details>
+  <details><summary>What ethical issues remain open?</summary><p>Sensor data privacy and retention, cybersecurity, fairness across road users and conditions, and how rare legal rules like school buses are weighted in the safety case.</p></details>
+  <details><summary>Does scaling solve driving?</summary><p>No. Open-loop forecasting loss improves with compute, but a deployed policy can still fail on rare interactions. You need closed-loop tests as well.</p></details>
+  <details><summary>How does this relate to our HW3c?</summary><p>Same tasks (detect and segment cars, people, traffic lights), the same small-object problem, and the same speed-versus-accuracy trade-off. Our recommendation there, a fast model at the edge and a bigger one in the cloud, is the same "train big, deploy small" idea.</p></details>
+  <h3>MAE</h3>
+  <details><summary>Is MAE a generative model like a GAN or a diffusion model?</summary><p>Not really. It reconstructs hidden patches to learn features, and its reconstructions are blurry. The goal is the encoder, not producing realistic new images.</p></details>
+  <details><summary>How does MAE relate to object detection?</summary><p>Its pretrained ViT is used as a backbone for detection. Yanghao Li, a co-author, built ViTDet on this. That is where the COCO numbers come from: box AP 53.3 with ViT-L, against 49.3 with supervised pretraining.</p></details>
+  <details><summary>What are MAE's biggest limitations?</summary><p>Weak linear probing, heavy pretraining compute, evidence mostly on ViT and ImageNet, and no measurement of dataset bias in what it learns.</p></details>
+  <details><summary>Can MAE work with CNNs?</summary><p>Not directly, because dropping patches breaks the convolution grid. Later work such as ConvNeXt V2 adapted the idea using sparse convolutions.</p></details>
+  <details><summary>Contrastive versus masked: which is better?</summary><p>It depends on the metric. Contrastive features are more linearly separable (better linear probe). MAE is better after fine-tuning and on transfer, needs less augmentation, and scales better with model size.</p></details>
+  <details><summary>Why does a high masking ratio make training faster?</summary><p>The encoder, which is the expensive part, only processes 25% of the tokens. Self-attention cost grows with the square of the token count, so the savings are large.</p></details>
+ </div>
+
+ <h2 id="numbers">Key numbers cheat sheet</h2>
+ <div class="card tw"><table>
+  <tr><th>Waymo</th><th>Value</th></tr>
+  <tr><td>Paid rides per week (March 2026)</td><td>about 500,000</td></tr>
+  <tr><td>Rider-only miles (through June 2026)</td><td>271.3 million</td></tr>
+  <tr><td>Crash reduction vs humans: serious injury or worse / pedestrian / cyclist</td><td>95% / 93% / 86%</td></tr>
+  <tr><td>Any injury / airbag deployment / motorcyclist injury</td><td>82% / 82% / 82%</td></tr>
+  <tr><td>Sensors (6th-gen Driver)</td><td>13 cameras, 4 lidar, 6 radar</td></tr>
+  <tr><td>Scaling-law study</td><td>500,000 hours of driving</td></tr>
+  <tr><td>School bus recall 25E084</td><td>3,067 vehicles</td></tr>
+  <tr><td>Santa Monica braking</td><td>about 17 → under 6 mph</td></tr>
+ </table></div>
+ <div class="card tw"><table>
+  <tr><th>MAE</th><th>Value</th></tr>
+  <tr><td>Masking ratio / patch size</td><td>75% / 16×16</td></tr>
+  <tr><td>Encoder / decoder</td><td>ViT-L 24 blocks / 8 blocks, 512-d, about 9% compute per token</td></tr>
+  <tr><td>ImageNet top-1, ViT-L: supervised / MoCo v3 / BEiT / MAE</td><td>82.6 / 84.1 / 85.2 / 85.9</td></tr>
+  <tr><td>MAE ViT-B / L / H / H@448</td><td>83.6 / 85.9 / 86.9 / 87.8</td></tr>
+  <tr><td>Supervised ViT-B / L / H</td><td>82.3 / 82.6 / 83.1</td></tr>
+  <tr><td>Linear probe with / without mask tokens in the encoder</td><td>59.6 / 73.5</td></tr>
+  <tr><td>Partial fine-tune (1 block), linear probe → </td><td>73.5 → 81.0</td></tr>
+  <tr><td>Pretraining hours, ViT-L / ViT-H (800 epochs, 128 TPU-v3 cores)</td><td>42.4 → 15.4 (2.8×) / 119.6 → 34.5 (3.5×)</td></tr>
+  <tr><td>COCO box AP / mask AP / ADE20K mIoU (ViT-L, supervised → MAE)</td><td>49.3 → 53.3 / 43.9 → 47.2 / 49.9 → 53.6</td></tr>
+  <tr><td>CVPR h5-index / citations</td><td>450 / 18,000+</td></tr>
+ </table></div>
+
+ <h2 id="glossary">Glossary in plain words</h2>
+ <div class="card tw"><table>
+  <tr><td><b>Lidar</b></td><td>Laser sensor that measures distance by timing light bounces; gives a 3D point cloud.</td></tr>
+  <tr><td><b>Geofence</b></td><td>The mapped, approved area where the robotaxi is allowed to drive.</td></tr>
+  <tr><td><b>Long tail</b></td><td>Many rare events that together hold most of the risk.</td></tr>
+  <tr><td><b>Knowledge distillation</b></td><td>Training a small "student" model to copy a big "teacher" model's outputs.</td></tr>
+  <tr><td><b>VLM</b></td><td>Vision language model: understands images and text together.</td></tr>
+  <tr><td><b>World model</b></td><td>A generative model that simulates how a scene looks and changes.</td></tr>
+  <tr><td><b>NHTSA / NTSB</b></td><td>US road-safety regulator (issues recalls, investigations) / independent crash investigator.</td></tr>
+  <tr><td><b>Recall</b></td><td>Formal fix for a safety defect; for Waymo, a software update.</td></tr>
+  <tr><td><b>Self-supervised</b></td><td>Learning where the data provides its own labels, for example hidden patches.</td></tr>
+  <tr><td><b>ViT</b></td><td>Vision Transformer: image patches treated as tokens with self-attention.</td></tr>
+  <tr><td><b>Mask token</b></td><td>A shared learned placeholder for a hidden patch, added before the decoder.</td></tr>
+  <tr><td><b>Linear probing</b></td><td>Freeze the encoder, train only a linear classifier on top.</td></tr>
+  <tr><td><b>Fine-tuning</b></td><td>Keep training the whole pretrained model on the target task.</td></tr>
+  <tr><td><b>Top-1 accuracy</b></td><td>Share of images where the first guess is correct.</td></tr>
+  <tr><td><b>AP / mIoU</b></td><td>Detection average precision / mean intersection-over-union for segmentation (same as HW3c).</td></tr>
+  <tr><td><b>h5-index</b></td><td>Largest h such that h papers from the last 5 years have at least h citations each.</td></tr>
+ </table></div>
+</div>
+
+<script src="talk.js"></script>
+<script>
+const T = window.TALK, S = T.slides, SP = T.speakers;
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = s => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+// who-says-what table: group consecutive slides by speaker
+const rows = []; S.forEach((s, i) => { const r = rows[rows.length - 1]; if (r && r.who === s.who) { r.to = i; r.secs += s.secs; } else rows.push({who: s.who, from: i, to: i, secs: s.secs}); });
+document.querySelector('#whoTable tbody').innerHTML = rows.map(r => `<tr><td>${r.from + 1}–${r.to + 1}</td><td><span class="dot" style="background:${SP[r.who].color}"></span>${SP[r.who].name}</td><td>${SP[r.who].part}</td><td>${fmt(r.secs)}</td></tr>`).join('')
+ + `<tr><td></td><td><b>Total</b></td><td></td><td><b>${fmt(S.reduce((a, s) => a + s.secs, 0))}</b></td></tr>`;
+document.getElementById('slides').innerHTML = S.map((s, i) => `
+ <div class="card slide" style="--c:${SP[s.who].color}">
+  <div class="hd"><b>${i + 1}. ${esc(s.title)}</b><span><span class="dot" style="background:${SP[s.who].color}"></span>${SP[s.who].name} · about ${s.secs}s</span></div>
+  <div class="say">${s.say.map(t => `<p>${esc(t)}</p>`).join('')}</div>
+  <div class="left"><b>Left out on purpose:</b> ${s.left.map(esc).join(' · ')}</div>
+  <div class="qlabel">Expected questions</div>
+  ${s.qa.map(q => `<details><summary>${esc(q.q)}</summary><p>${esc(q.a)}</p></details>`).join('')}
+ </div>`).join('');
+</script>
+</body>
+</html>
