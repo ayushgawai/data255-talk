@@ -30,9 +30,9 @@ window.TALK = {
    "title": "Title and agenda",
    "who": "ayush",
    "say": [
-    "Hi everyone. I'm Ayush, and with me are Manav, Naman and Mansi.",
-    "Two parts today. First, Manav and I show how Waymo uses deep learning to run taxis with no driver. Then Naman and Mansi explain a famous paper called Masked Autoencoders.",
-    "The boxes on the person and the bike behind me are object detection, just like our HW3c."
+    "Good afternoon, everyone. I'm Ayush, and these are my teammates Manav, Naman and Mansi.",
+    "We will be presenting two parts today. First, Manav and I will cover an industry case study on Waymo. Then Naman and Mansi will present a research paper called Masked Autoencoders.",
+    "And the boxes on the screen are object detection, just like in our HW3c."
    ],
    "left": [
     "Why we picked these two topics together."
@@ -48,14 +48,14 @@ window.TALK = {
    "title": "Waymo at scale",
    "who": "ayush",
    "say": [
-    "Waymo is a company owned by Alphabet, Google's parent company. It runs paid taxi rides with nobody in the driver's seat.",
-    "By March 2026 it was giving about five hundred thousand rides every week. By June 2026 it had driven two hundred seventy-one million miles with only riders inside.",
-    "One honest note: these numbers show how big the service is. They don't prove that every research model we mention is the one inside the real cars."
+    "Let's start with Waymo. Waymo is owned by Alphabet, Google's parent company, and it runs paid taxi rides with nobody in the driver's seat.",
+    "To give you a sense of scale, it gives about five hundred thousand rides a week, and it has driven over two hundred seventy million miles with only passengers inside."
    ],
    "left": [
     "Which cities it runs in.",
     "What \"geofenced\" means.",
-    "How it compares to Tesla."
+    "How it compares to Tesla.",
+    "Whether these research models run in the real cars."
    ],
    "qa": [
     {
@@ -69,6 +69,10 @@ window.TALK = {
     {
      "q": "How is this different from Tesla?",
      "a": "Tesla relies mostly on cameras. Waymo adds lidar and radar as backup in the dark and in glare, and runs with no one in the driver's seat inside its area. We did not study Tesla in depth in our report."
+    },
+    {
+     "q": "Do the research models you mention actually run in the paid cars?",
+     "a": "Not necessarily. The ride and mile numbers show the scale of the service. Public sources do not confirm that EMMA, MotionLM or Genie 3 run unchanged in the cars, so we keep research and production separate."
     }
    ]
   },
@@ -76,8 +80,10 @@ window.TALK = {
    "title": "The problem: three constraints",
    "who": "ayush",
    "say": [
-    "So what's the problem? The car has to see the world, guess what everyone around it will do, and pick a safe path, many times every second.",
-    "Three things make it hard. Speed: it all runs on the car's own computer, so the biggest models are too slow. Rare cases: the dangerous moments, like a child running out, almost never happen, so there's little data. And proof: you need numbers that show it's safe, not a cool demo."
+    "So, what problem is Waymo solving? The car has to see everything around it, predict what every person and car will do next, and choose a safe path, many times every second.",
+    "Three things make this hard. First, speed: it all runs on the car's own computer, so the biggest models are too slow.",
+    "Second, rare events: the most dangerous moments, like a child running into the road, almost never happen, so there's very little data.",
+    "And third, proof: regulators need real safety numbers, not a nice demo."
    ],
    "left": [
     "What lidar is.",
@@ -107,9 +113,9 @@ window.TALK = {
    "title": "Seven years of deep learning",
    "who": "ayush",
    "say": [
-    "Waymo did not build one giant model on day one. It took seven years, and each step is a topic from our class.",
-    "Architecture search for lidar networks in 2019. Learned data augmentation in 2020. MotionLM in 2023, which treats car movements like words in a sentence.",
-    "Then EMMA, scaling laws, the Foundation Model, and in 2026 a World Model that generates realistic driving scenes."
+    "Now, Waymo didn't get here with one giant model. It took about seven years of steps, and each step matches a topic from our class.",
+    "In 2019, they used architecture search for lidar networks. In 2020, learned data augmentation. In 2023, MotionLM, which treats car movements like words in a sentence.",
+    "And after that came EMMA, scaling laws, the Foundation Model, and in 2026, a World Model that generates driving scenes."
    ],
    "left": [
     "What neural architecture search is.",
@@ -140,11 +146,11 @@ window.TALK = {
    "title": "Think fast, think slow",
    "who": "ayush",
    "say": [
-    "This is the main design, from what Waymo has shared publicly.",
-    "The top path is System 1, think fast. It turns camera, lidar and radar into a list of objects, all the time. The bottom path is System 2, think slow: a vision language model trained using Gemini, which knows things about the world and helps in strange scenes. See how the fast dots move quicker.",
-    "Both feed a World Decoder that predicts where everyone goes and plans the car's path.",
-    "At the bottom is how it fits in the car: a huge teacher model passes its knowledge to a small student. That's knowledge distillation, like DeiT.",
-    "Manav, over to you."
+    "This brings us to the main design, the Waymo Foundation Model. The sensor data goes down two paths.",
+    "The top path is System 1, thinking fast. It turns camera, lidar and radar data into a list of objects, all the time. The bottom path is System 2, thinking slow. It's a vision language model trained using Gemini, which brings general world knowledge for unusual situations.",
+    "Both paths feed a World Decoder, which predicts where everyone will go and plans the car's path.",
+    "At the bottom is how all this fits in a car: a large teacher model passes its knowledge to a small student model. That's knowledge distillation, like we saw with DeiT.",
+    "With that, I'll hand it over to Manav."
    ],
    "left": [
     "What a vision language model is.",
@@ -179,10 +185,10 @@ window.TALK = {
    "title": "The data flywheel",
    "who": "manav",
    "say": [
-    "Thanks Ayush. One model plays three roles: Driver, Simulator and Critic.",
-    "Inner circle: the Driver practices inside the Simulator, with rewards and penalties, like a video game.",
-    "Outer circle: real driving logs come in, the Critic flags odd moments, engineers fix them, test in simulation, and a safety check decides if it ships.",
-    "The simulator is built on DeepMind's Genie 3. It creates camera and lidar data for rare cases on demand."
+    "Thank you, Ayush. Waymo uses this same model for three roles: the Driver, the Simulator and the Critic.",
+    "In the small inner circle, the Driver practices inside the Simulator and gets rewards or penalties, a bit like a video game.",
+    "In the big outer circle, real driving logs come in, the Critic flags moments where the car behaved strangely, engineers fix them, test the fix in simulation, and a safety check decides if it ships.",
+    "The simulator itself is built on Google DeepMind's Genie 3, so Waymo can generate rare situations whenever it needs them."
    ],
    "left": [
     "What Genie 3 is.",
@@ -212,14 +218,15 @@ window.TALK = {
    "title": "How success is measured",
    "who": "manav",
    "say": [
-    "How do you prove a car with no driver is safe? Waymo compares its crash rates to human drivers on the same kinds of roads.",
-    "Over two hundred seventy-one million miles, it reports ninety-five percent fewer crashes with serious injuries, ninety-three percent fewer that hurt pedestrians, and eighty-two percent fewer with any injury.",
-    "Our caution: this looks back at past data, it is not a controlled experiment. A percentage only means something if you know the miles, the comparison group and the scope."
+    "Next, how do you prove that a car with no driver is safe? Waymo compares its crash rates with human drivers on the same kinds of roads.",
+    "It reports ninety-five percent fewer crashes with serious injuries, ninety-three percent fewer that hurt pedestrians, and eighty-two percent fewer with any injury.",
+    "One caution, though: this is past data, not a controlled experiment."
    ],
    "left": [
     "How the human benchmark is built.",
     "Whether anyone independent checked.",
-    "What a confidence interval means here."
+    "What a confidence interval means here.",
+    "Why a percentage needs its miles and comparison group."
    ],
    "qa": [
     {
@@ -237,6 +244,10 @@ window.TALK = {
     {
      "q": "Why not run a randomized trial?",
      "a": "You cannot randomly assign people to crashes. So the evidence has to be observational, which is why we call it retrospective."
+    },
+    {
+     "q": "Why do you say a percentage alone is not enough?",
+     "a": "A crash reduction only means something with the exposure (how many miles), how the human comparison group was built, the confidence interval, and the scope (which cities and roads). We call that denominator discipline."
     }
    ]
   },
@@ -244,10 +255,10 @@ window.TALK = {
    "title": "Failures and what changed",
    "who": "manav",
    "say": [
-    "Averages can hide failures, so here are three real ones.",
-    "School buses in Austin: some cars could pass a school bus before its stop arm was pulled back. That led to a recall of 3,067 vehicles.",
-    "A citywide blackout in San Francisco: many cars asked for remote help at once, and Waymo changed its rules after.",
-    "And in Santa Monica, a car hit a nine-year-old in a school zone after braking from about seventeen to under six miles per hour. Minor injuries, and the investigation is still open."
+    "However, averages can hide failures, so let's look at three real cases.",
+    "First, in Austin, some cars could pass a school bus before its stop arm was pulled back, which led to a recall of over three thousand vehicles.",
+    "Second, during a citywide blackout in San Francisco, many cars asked for remote help at once, and Waymo changed its rules afterward.",
+    "And third, in Santa Monica, a car hit a nine-year-old in a school zone after braking from about seventeen to under six miles per hour. The child had minor injuries, and that investigation is still open."
    ],
    "left": [
     "How the school bus problem was fixed.",
@@ -277,9 +288,9 @@ window.TALK = {
    "title": "Course map and key learnings",
    "who": "manav",
    "say": [
-    "Here's how this connects to our class. Almost every topic shows up: CNN design, data augmentation, detection, transformers, transfer learning, distillation and generative models.",
-    "Our biggest takeaway: Waymo's strength isn't one magic network. It's the system around it: small fast models on the car, a simulator for rare cases, and careful statistics.",
-    "Now Naman and Mansi will take you through the paper."
+    "To bring it all together, almost every topic from our course shows up in Waymo, as you can see on the left.",
+    "Our biggest takeaway is that Waymo's strength isn't one magic network. It's the system around it: small, fast models in the car, a simulator for rare cases, and careful statistics.",
+    "That concludes our case study, and I'll hand it over to Naman for the paper."
    ],
    "left": [
     "Which topic matters most.",
@@ -300,9 +311,9 @@ window.TALK = {
    "title": "MAE: the paper",
    "who": "naman",
    "say": [
-    "Thanks Manav. Our paper is \"Masked Autoencoders Are Scalable Vision Learners\", by Kaiming He and his team at Facebook AI Research, published at CVPR 2022.",
-    "CVPR is number one in computer vision on Google Scholar, and number two of all venues, right after Nature. This one paper has over eighteen thousand citations.",
-    "The flickering picture on the right is the whole idea. I'll explain it in a minute."
+    "Thank you, Manav. For the second part, we chose the paper \"Masked Autoencoders Are Scalable Vision Learners\", by Kaiming He and his team at Facebook AI Research, published at CVPR 2022.",
+    "CVPR is the top venue in computer vision, and second among all venues, right after Nature. This paper alone has over eighteen thousand citations.",
+    "The image on the right shows the whole idea, and I'll explain it in a moment."
    ],
    "left": [
     "What the h5-index is.",
@@ -323,10 +334,9 @@ window.TALK = {
    "title": "Problem: can vision learn like BERT?",
    "who": "naman",
    "say": [
-    "The problem: labels are expensive. Someone has to tag every image by hand.",
-    "In language, BERT fixed this: hide some words and let the model guess them. No labels needed. \"The car stopped at the red light.\" Easy, but only if you understand the sentence.",
-    "Images are different. Hide fifteen percent and the model just copies nearby pixels. So MAE hides seventy-five percent, and now it has to understand the scene.",
-    "Vision Transformers made hiding pieces easy, which CNNs could not do well."
+    "Let's start with the problem. Labels are expensive, because someone has to tag every image by hand.",
+    "In language, BERT solved this by hiding some words and letting the model guess them, so no labels are needed. For example, \"the car stopped at the red light\". It's easy to guess, but only if you understand the sentence.",
+    "Images are different. If you hide fifteen percent, the model can just copy the nearby pixels. So MAE hides seventy-five percent, which forces it to understand the scene."
    ],
    "left": [
     "What self-supervised means.",
@@ -362,17 +372,17 @@ window.TALK = {
    "title": "Method: asymmetric encoder and decoder",
    "who": "naman",
    "say": [
-    "Here's how MAE works, left to right. Cut the image into patches and hide seventy-five percent at random.",
-    "The big encoder only looks at the visible quarter. That's the key trick, and it makes training about three times faster.",
+    "Now let's see how MAE works, from left to right.",
+    "The image is cut into small squares called patches, and seventy-five percent are hidden at random. The key trick is that the big encoder only sees the visible quarter, which makes training about three times faster.",
     "Then placeholders called mask tokens fill the gaps, and a small decoder redraws the image. The loss only checks the hidden patches.",
-    "After training, the decoder is thrown away and the encoder is kept.",
-    "The code on the right is the real masking trick: random number per patch, sort, keep a quarter."
+    "After training, the decoder is thrown away and the encoder is kept."
    ],
    "left": [
     "Why the loss uses only hidden patches.",
     "What a mask token is.",
     "Why the decoder is small.",
-    "Why the reconstruction looks blurry."
+    "Why the reconstruction looks blurry.",
+    "The masking code shown on the right."
    ],
    "qa": [
     {
@@ -401,9 +411,9 @@ window.TALK = {
    "title": "Results",
    "who": "naman",
    "say": [
-    "Does it work? The large model gets eighty-five point nine percent on ImageNet, beating normal supervised training, MoCo and BEiT.",
-    "The real story is on the right. Grey, normal training, stops improving as models grow. Yellow, MAE, keeps climbing, to eighty-seven point eight percent, the best at the time using only ImageNet.",
-    "Mansi, over to you."
+    "So, does it work? With the large model, MAE reaches eighty-five point nine percent on ImageNet, beating normal supervised training, MoCo and BEiT.",
+    "But the more important result is on the right. The grey line shows that normal training stops improving as models get bigger, while the yellow line shows MAE keeps improving, up to eighty-seven point eight percent, the best result at the time using only ImageNet.",
+    "Now Mansi will explain why it works and what we think of it."
    ],
    "left": [
     "Whether 85.9 vs 85.2 is a big gap.",
@@ -433,9 +443,9 @@ window.TALK = {
    "title": "What matters, and what it buys",
    "who": "mansi",
    "say": [
-    "Thanks Naman. Four design results stand out.",
-    "Keeping hidden patches out of the encoder: faster, and fourteen points better on a simple test. Random hiding beats blocks or grids. No data augmentation needed, because masking acts as augmentation. And plain pixels are enough as targets.",
-    "What you get: about three times faster training, and better transfer. COCO detection goes from forty-nine point three to fifty-three point three, the same AP metric we used in HW3c."
+    "Thank you, Naman. The authors tested almost every design choice, and four results stand out.",
+    "First, keeping hidden patches out of the encoder makes it faster, and fourteen points better on a simple test. Second, random hiding works better than blocks or a grid. Third, it works even without data augmentation, because masking acts like augmentation. And fourth, plain pixels are enough as targets.",
+    "So what does this give us? About three times faster training, and better transfer. For example, COCO detection goes from forty-nine point three to fifty-three point three, the same AP metric we used in HW3c."
    ],
    "left": [
     "What the \"simple test\" (linear probing) is.",
@@ -465,11 +475,11 @@ window.TALK = {
    "title": "Four critiques",
    "who": "mansi",
    "say": [
-    "We judged it four ways.",
-    "Peer reviewer: strong accept. Simple idea, very thorough experiments. But similar ideas existed, like BEiT, and almost all tests are on ImageNet.",
-    "Patent board: use it inside the company on your own images, but don't patent it. Too much earlier work, and the weights are non-commercial.",
-    "Code review: short and clean, with a smart sorting trick, but an old library version, no tests, and archived in 2025.",
-    "Authors: the team behind ResNet, Mask R-CNN, MoCo and COCO, so they had the baselines and the benchmarks."
+    "Next, we reviewed the paper from four perspectives.",
+    "As peer reviewers, we'd give it a strong accept: a simple idea with very thorough experiments, although similar ideas like BEiT existed and most tests are on ImageNet.",
+    "As a company patent board, we'd use it internally on our own images, but not patent it, because there's too much prior work and the weights are non-commercial.",
+    "As code reviewers, we found the code short and clean, but it uses an old library, has no tests, and is now archived.",
+    "And finally, the authors built ResNet, Mask R-CNN, MoCo and COCO, so they had the tools to prove it."
    ],
    "left": [
     "Why strong accept if the idea isn't new.",
@@ -500,8 +510,8 @@ window.TALK = {
    "title": "Key learnings and our project",
    "who": "mansi",
    "say": [
-    "What we learned: a practice task must be hard to be useful. Autoencoders can be powerful pretraining, not just compression. And never judge a model by one metric.",
-    "For our project: our video recognition work had few labeled clips, exactly where MAE helps. We plan to fine-tune the last blocks of an MAE encoder and compare it with our CNN from scratch."
+    "So, what did we learn? A practice task has to be hard to be useful, autoencoders can be powerful pretraining and not just compression, and we should never judge a model by one metric.",
+    "For our own project, our video recognition work had very few labeled clips, which is exactly where MAE helps. So we plan to fine-tune the last blocks of an MAE encoder and compare it with our CNN trained from scratch."
    ],
    "left": [
     "Why only the last blocks.",
@@ -522,8 +532,9 @@ window.TALK = {
    "title": "Closing and questions",
    "who": "mansi",
    "say": [
-    "To wrap up: two stories, one lesson. Waymo shows that the system around the model decides whether deep learning is safe on a real road. MAE shows that a hard self-supervised task lets models grow without labels.",
-    "Both train big on unlabeled data and then run something smaller. Thank you, we're happy to take your questions."
+    "To wrap up, we presented two stories with one lesson. Waymo shows that the system around the model decides whether deep learning is safe on a real road, and MAE shows that a hard self-supervised task lets models grow without labels.",
+    "Both train big on unlabeled data and then run something smaller.",
+    "That brings us to the end of our presentation. Thank you, and we're happy to take your questions."
    ],
    "left": [
     "Whether Waymo uses MAE.",
@@ -547,4 +558,4 @@ window.TALK = {
  ]
 };
 // time budget per slide: about 2.5 spoken words per second, plus a short pause
-window.TALK.slides.forEach(s => { s.secs = Math.round(s.say.join(' ').split(/\s+/).length / 2.5) + 2; });
+window.TALK.slides.forEach(s => { s.secs = Math.round(s.say.join(' ').split(/\s+/).length / 2.5) + 1; });
