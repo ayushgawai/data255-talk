@@ -128,7 +128,7 @@ function render(){
   $('#script').innerHTML = `<div class="label">Read this, word for word</div>` + h;
   $('#script').scrollTop = 0;
   $('#left').innerHTML = s.left.map(t => `<li>${esc(t)}</li>`).join('');
-  $('#qa').innerHTML = s.qa.map(q => `<details><summary>${esc(q.q)}</summary><p>${esc(q.a)}</p></details>`).join('');
+  $('#qa').innerHTML = s.qa.map(q => `<details open><summary>${esc(q.q)}</summary><p>${esc(q.a)}</p></details>`).join('');
   $('#nextTag').textContent = nx ? `NEXT · ${SP[nx.who].name.split(' ')[0].toUpperCase()}` : 'END';
   [...$('#tl').children].forEach((d, i) => { d.classList.toggle('on', i === cur); d.classList.toggle('done', i < cur); });
   post('#fCur', cur); post('#fNext', Math.min(cur + 1, N - 1));
