@@ -177,6 +177,32 @@ svg text{font-family:Inter,sans-serif}
 .trail{animation:trail 10s linear infinite}
 @keyframes trail{from{transform:translateX(-500px)}to{transform:translateX(2000px)}}
 .fade-sq{animation:fsq 10s linear infinite}
+
+/* ===== light theme ===== */
+#stage{--bg:#f5f7fb;--panel:#ffffff;--panel2:#eef2f8;--line:rgba(15,23,42,.12);--ink:#0f172a;--muted:#475569;--dim:#64748b;
+ --teal:#0d9488;--blue:#2563eb;--amber:#d97706;--pink:#db2777;--coral:#e11d48;--violet:#7c3aed;--green:#16a34a;
+ background:radial-gradient(1100px 650px at 85% -15%,#dbeafe 0%,transparent 60%),radial-gradient(900px 600px at -10% 115%,#ccfbf1 0%,transparent 55%),var(--bg);color:var(--ink)}
+#stage::before{background-image:linear-gradient(rgba(15,23,42,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.05) 1px,transparent 1px)}
+.card,.ti .tc{box-shadow:0 1px 2px rgba(15,23,42,.05),0 10px 30px rgba(15,23,42,.07);backdrop-filter:none}
+.pcard p,.inc p,.map .v,.gapc p,.crit li{color:#334155}
+[style*="color:#cbd5e1"]{color:#334155!important}
+.map .k{color:#1e40af;background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.3)}
+.inc .art{background:linear-gradient(180deg,#eef2f8,#e2e8f0)}
+.tok{background:#eef2f8}
+.enh span{background:#eef2f8}
+.slide:not(:first-child) [fill="#111a2e"],.slide:not(:first-child) [fill="#0f1c33"],.slide:not(:first-child) [fill="#0b1325"]{fill:#ffffff}
+.slide:not(:first-child) [fill="#e8eefc"]{fill:#0f172a}
+.slide:not(:first-child) [stroke="#e8eefc"]{stroke:#0f172a}
+.slide:not(:first-child) [fill="#97a8c7"]{fill:#475569}
+.slide:not(:first-child) [stroke="#1e3a5f"]{stroke:#dbeafe}
+.slide:not(:first-child) [fill="#0a1020"]{fill:#cbd5e1}
+[fill="#111d36"]{fill:#e2e8f0}[fill="#16264a"]{fill:#cbd5e1}[stroke="#1b2a4a"]{stroke:#cbd5e1}
+.slide:not(:first-child) [stroke="#e2f2ff"]{stroke:#64748b;stroke-opacity:.6}
+.slide:not(:first-child) [stroke="#334155"]{stroke:#94a3b8}
+#hud{color:var(--muted)}
+.slide:not(:first-child) [fill="#f8fafc"]{fill:#0f172a}
+/* title slide keeps its night-street illustration */
+.slide:first-child{--ink:#e8eefc;--muted:#a9b8d3;--teal:#2dd4bf;--blue:#60a5fa;--amber:#fbbf24;--pink:#f472b6;color:#e8eefc}
 </style>
 </head>
 <body>
